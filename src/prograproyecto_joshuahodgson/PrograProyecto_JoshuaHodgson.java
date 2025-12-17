@@ -25,7 +25,7 @@ public class PrograProyecto_JoshuaHodgson {
         int opcion=entrada.nextInt();
         switch (opcion) {
             case 1:
-                
+                InicioDeJuego();
                 break;
             case 2:
                 System.out.println("Hasta la proxima..");
@@ -49,5 +49,27 @@ public class PrograProyecto_JoshuaHodgson {
         jugador0.simbolo="0";
         Jugador_1 jugadoract=jugadorx;
         boolean juegoact=true;
+        while (juegoact) {
+            mostrarTablero();
+            System.out.println("Cuando sea su turno ingrese numeros del 0 al 2");
+            System.out.println("Turno de "+jugadoract.nombre+jugadoract.simbolo);
+            System.out.println("Ingrese la fila");
+            int fila=entrada.nextInt();
+            System.out.println("Ingrese la columna");
+            int colum=entrada.nextInt();
+            if (tablero[fila][colum].equals(" ")) {
+                tablero[fila][colum]=jugadoract.simbolo;
+                
+            }
+        }
+    }
+    public static void mostrarTablero(){
+        for (int i = 0; i < 3; i++) {
+            System.out.print("|");
+            for (int j = 0; j < 3; j++) {
+                System.out.println(tablero[i][j]+"|");
+            }
+            System.out.println();
+        }
     }
 }
