@@ -19,7 +19,7 @@ public class PrograProyecto_JoshuaHodgson {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Bienvenidos a X-0");
+        System.out.println("Bienvenidos a TIC TAC TOE");
         System.out.println("1.Jugar");
         System.out.println("2.Salir");
         int opcion=entrada.nextInt();
@@ -59,17 +59,80 @@ public class PrograProyecto_JoshuaHodgson {
             int colum=entrada.nextInt();
             if (tablero[fila][colum].equals(" ")) {
                 tablero[fila][colum]=jugadoract.simbolo;
-                
+                if (Ganador(jugadoract.simbolo)) {
+                    mostrarTablero();
+                    System.out.println("GANASTE "+jugadoract.nombre);
+                    juegoact=false;
+                    ReiniciodeJuego();
+                }else if (tablerofull()) {
+                    mostrarTablero();
+                    System.out.println("TERMINO EN UN EMPATE");
+                    juegoact=false;
+                    ReiniciodeJuego();
+                }else{
+                    if ( jugadoract==jugadorx) {
+                        jugadoract=jugador0;
+                    }else{
+                    jugadoract=jugadorx;
+                    }
+                }
+            }
+            else{
+                System.out.println("Esa posicion ya esta ocupada");
             }
         }
     }
     public static void mostrarTablero(){
+//        System.out.println("-------");
         for (int i = 0; i < 3; i++) {
             System.out.print("|");
             for (int j = 0; j < 3; j++) {
-                System.out.println(tablero[i][j]+"|");
+                System.out.print(tablero[i][j]+"|");
             }
             System.out.println();
+            System.out.println("-------");
         }
+       
     }
+     public static boolean Ganador(String simbolo){
+         for (int i = 0; i <3; i++) {
+             if (tablero[i][0].equals(simbolo)&& tablero[i][1].equals(simbolo)&&tablero[i][2].equals(simbolo)) {
+               return true;  
+             }
+         }
+         for (int i = 0; i < 3; i++) {
+             if (tablero[0][i].equals(simbolo)&& tablero[1][i].equals(simbolo)&&tablero[2][i].equals(simbolo)) {
+                 return true;            
+             }
+         }
+         if (tablero[0][0].equals(simbolo)&& tablero[1][1].equals(simbolo)&&tablero[2][2].equals(simbolo)) {
+         return true;
+         }
+         if (tablero[0][2].equals(simbolo)&& tablero[1][1].equals(simbolo)&&tablero[2][0].equals(simbolo)) {
+         return true;
+         }
+        return false; 
+     }
+     public static boolean tablerofull(){
+         for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 3; j++) {
+                 if (tablero[i][j].equals(" ")) {
+                     return false;
+                 }
+             }
+         }
+        return true;
+     
+     }
+     public static void ReiniciodeJuego(){
+         System.out.println("Desea jugar otra vez?");
+         System.out.println("1.Si");
+         System.out.println("2.No");
+         int opcion=entrada.nextInt();
+         if (opcion==1) {
+             InicioDeJuego();
+         }else{
+             System.out.println("Fin del juego");
+         }
+     }
 }
